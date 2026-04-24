@@ -1,13 +1,13 @@
 ﻿namespace Ticket_Tracker.Entity;
 
-abstract class BaseEntity
+public abstract class BaseEntity
 {
     #region properties
     public Guid Id { get; set; }
     #endregion properties
 
     #region ctor
-    protected BaseEntity(Guid id)
+    public BaseEntity(Guid id)
     {
         Id = id;
     }
