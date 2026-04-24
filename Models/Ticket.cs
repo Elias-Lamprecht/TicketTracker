@@ -1,8 +1,8 @@
-﻿using Ticket_Tracker.Entity;
+﻿using TicketTracker.Entity;
 
-namespace Ticket_Tracker.Models;
+namespace TicketTracker.Models;
 
-class Ticket : NamedEntity
+public class Ticket : NamedEntity
 {
     #region properties
 

@@ -1,6 +1,6 @@
-﻿using Ticket_Tracker.Models;
+﻿using TicketTracker.Models;
 
-namespace Ticket_Tracker.Services;
+namespace TicketTracker.Services;
 
 public class StatusService
 {

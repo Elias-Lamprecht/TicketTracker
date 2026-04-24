@@ -1,4 +1,4 @@
-﻿namespace Ticket_Tracker.Entity;
+﻿namespace TicketTracker.Entity;
 
 public abstract class BaseEntity
 {
