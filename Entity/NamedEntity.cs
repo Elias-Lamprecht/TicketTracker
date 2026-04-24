@@ -1,6 +1,6 @@
 ﻿namespace Ticket_Tracker.Entity;
 
-abstract class NamedEntity : BaseEntity
+public abstract class NamedEntity : BaseEntity
 {
     #region properties
     public string Title { get; private set; }
@@ -8,7 +8,7 @@ abstract class NamedEntity : BaseEntity
     #endregion properties
 
     #region ctor
-    protected NamedEntity(Guid id, string title, string? description) : base(id)
+    public NamedEntity(Guid id, string title, string? description) : base(id)
     {
         SetTitle(title);
 
