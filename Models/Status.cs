@@ -2,7 +2,7 @@
 
 namespace Ticket_Tracker.Models;
 
-class Status : NamedEntity
+public class Status : NamedEntity
 {
     public Status(Guid id, string title, string description) : base(id, title, description)
     {
