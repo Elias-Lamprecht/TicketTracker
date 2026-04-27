@@ -59,5 +59,18 @@ public class PriorityRepository
         }
     }
 
+    public async void DeletePriorityAsync(Priority priority)
+    {
+        using SqlConnection connection = await _dbFactory.CreateOpenConnectionAsync();
+
+        const string sql = "Delete Priority WHERE PriorityId = @PriorityId";
+
+        using (SqlCommand command = new(sql, connection))
+        {
+            command.Parameters.Add("PriorityId", System.Data.SqlDbType.UniqueIdentifier).Value = priority.Id;
+            command.ExecuteNonQuery();
+        }
+    }
+
     #endregion methods
 }
