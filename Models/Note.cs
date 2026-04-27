@@ -5,24 +5,27 @@ namespace TicketTracker.Models;
 public class Note : BaseEntity
 {
     #region properties
-    public string Text { get; private set; }
+
+    private string _text = string.Empty;
+    public string Text
+    {
+        get => _text; 
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value));
+            
+            _text = value;
+        }
+    }
+
     #endregion properties
 
     #region ctor
     public Note(Guid id, string text) : base(id)
     {
-        SetText(text);
-    }
-    #endregion ctor
-
-    #region methods
-    public void SetText(string text)
-    {
-        if (string.IsNullOrEmpty(text))
-            throw new ArgumentNullException();
-
         Text = text;
     }
-    #endregion methods
+    #endregion ctor
 }
 
