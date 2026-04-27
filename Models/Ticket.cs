@@ -11,6 +11,7 @@ public class Ticket : NamedEntity
     #region navigationProperties
 
     public Status Status { get; private set; }
+    public List<Note> Notes { get; private set; }
 
     #endregion navigationProperties
 
@@ -21,7 +22,23 @@ public class Ticket : NamedEntity
     {
         TicketNumber = ticketNumber;
         Status = status;
+
+        Notes = new();
     }
     #endregion ctor
+
+    #region methods
+
+    public void AddNote(Note note)
+    {
+        Notes.Add(note);
+    }
+
+    public void RemoveNode(Note note)
+    {
+        Notes.Remove(note);
+    }
+
+    #endregion methods
 }
 
