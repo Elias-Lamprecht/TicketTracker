@@ -4,49 +4,51 @@ namespace TicketTracker.Services;
 
 public class StatusService
 {
-    #region properties
+	#region ctor
 
-    private static StatusService? _instance { get; set; }
-    private List<Status> _statuses { get; set; }
+	public StatusService()
+	{
+		Statuses = new List<Status>();
+	}
 
-    #endregion properties
+	#endregion ctor
 
-    #region singleton
+	#region singleton
 
-    public static StatusService Instance()
-    {
-        if (_instance == null)
-        {
-            _instance = new StatusService();
-        }
+	public static StatusService Instance()
+	{
+		if (_instance == null) _instance = new StatusService();
 
-        return _instance;
-    }
+		return _instance;
+	}
 
-    #endregion singleton
+	#endregion singleton
 
-    #region ctor
+	#region properties
 
-    public StatusService()
-    {
-        _statuses = new();
-    }
+	private static StatusService? _instance { get; set; }
+	public List<Status> Statuses { get; init; }
 
-    #endregion ctor
+	#endregion properties
 
-    #region methods
+	#region methods
 
-    public Status CreateStatus(Guid id, string title, string description)
-    {
-        Status status = new(id, title, description);
-        _statuses.Add(status);
-        return status;
-    }
+	public Status CreateStatus(Guid id, string title, string description)
+	{
+		Status status = new(id, title, description);
+		Statuses.Add(status);
+		return status;
+	}
 
-    public void DeleteStatus(Status status)
-    {
-        _statuses.Remove(status);
-    }
+	public void DeleteStatus(Status status)
+	{
+		Statuses.Remove(status);
+	}
 
-    #endregion methods
+	public void DeleteAllStatuses()
+	{
+		Statuses.Clear();
+	}
+
+	#endregion methods
 }
