@@ -35,5 +35,18 @@ public class StatusRepository
         }
     }
 
+    public async void DeleteStatusAsync(Status status)
+    {
+        using SqlConnection connection = await _dbFactory.CreateOpenConnectionAsync();
+
+        const string sql = "Delete Status WHERE StatusId = @StatusId";
+
+        using (SqlCommand command = new(sql, connection))
+        {
+            command.Parameters.Add("StatusId", System.Data.SqlDbType.UniqueIdentifier).Value = status.Id;
+            command.ExecuteNonQuery();
+        }
+    }
+
     #endregion methods
 }
