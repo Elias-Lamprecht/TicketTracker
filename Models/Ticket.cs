@@ -12,6 +12,7 @@ public class Ticket : NamedEntity
 
     public Status Status { get; private set; }
     public Priority Priority { get; private set; }
+    public List<Note> Notes { get; init; }
 
     #endregion navigationProperties
 
