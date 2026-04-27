@@ -6,10 +6,24 @@ public class StatusService
 {
     #region properties
 
-    private StatusService? _instance { get; set; }
+    private static StatusService? _instance { get; set; }
     private List<Status> _statuses { get; set; }
 
     #endregion properties
+
+    #region singleton
+
+    public static StatusService Instance()
+    {
+        if (_instance == null)
+        {
+            _instance = new StatusService();
+        }
+
+        return _instance;
+    }
+
+    #endregion singleton
 
     #region ctor
 
