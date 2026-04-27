@@ -7,9 +7,10 @@ on:
     branches: [ "master" ]
 
 jobs:
+  # --- JOB 1: BUILD ---
   build:
+    name: "Build Project"
     runs-on: windows-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -19,13 +20,12 @@ jobs:
       run: |
         $content = @"
         namespace TicketTracker;
-
         public static class Constants
         {
             public const string ConnectionString = "${{ secrets.DB_CONNECTION_STRING }}";
         }
         "@
-        Set-Content -Path "Constants.cs" -Value $content
+        Set-Content -Path "TicketTracker/Constants.cs" -Value $content
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -33,13 +33,45 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Add SqlClient
+      working-directory: ./TicketTracker
       run: dotnet add package Microsoft.Data.SqlClient
 
     - name: Restore dependencies
+      working-directory: ./TicketTracker
       run: dotnet restore
 
     - name: Build
+      working-directory: ./TicketTracker
       run: dotnet build --no-restore --configuration Release
 
+  # --- JOB 2: TEST ---
+  test:
+    name: "Run Unit Tests"
+    needs: build  # <--- THIS IS THE REQUIREMENT
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    # Re-create constants for the test environment
+    - name: Create Constants file
+      shell: pwsh
+      run: |
+        $content = @"
+        namespace TicketTracker;
+        public static class Constants { public const string ConnectionString = "${{ secrets.DB_CONNECTION_STRING }}"; }
+        "@
+        Set-Content -Path "TicketTracker/Constants.cs" -Value $content
+
+    - name: Add SqlClient
+      working-directory: ./TicketTracker
+      run: dotnet add package Microsoft.Data.SqlClient
+
     - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal
+      working-directory: ./TicketTracker.Tests
+      run: dotnet test --configuration Release --verbosity normal
