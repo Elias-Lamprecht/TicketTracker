@@ -1,0 +1,1 @@
+Ticket Tracker! quite possibly the most gloriously janky ticket tracker on the market. Not only is it questionably safe and impressively unstable, it might even crash mid-click… and if luck really isn’t on your side, it may yeet your data into the void. :D
