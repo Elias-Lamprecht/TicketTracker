@@ -47,8 +47,8 @@ public class StatusRepository
         using (SqlCommand command = new(sql, connection))
         {
             command.Parameters.Add("StatusId", System.Data.SqlDbType.UniqueIdentifier).Value = status.Id;
-            command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = status.Title;
-            command.Parameters.Add("@Description", System.Data.SqlDbType.VarChar).Value = status.Description;
+            command.Parameters.Add("Title", System.Data.SqlDbType.NVarChar, 32).Value = status.Title;
+            command.Parameters.Add("Description", System.Data.SqlDbType.NVarChar, 128).Value = status.Description;
 
             command.ExecuteNonQuery();
         }
