@@ -11,17 +11,19 @@ public class Ticket : NamedEntity
     #region navigationProperties
 
     public Status Status { get; private set; }
-    public List<Note> Notes { get; private set; }
+    public Priority Priority { get; private set; }
 
     #endregion navigationProperties
 
     #endregion properties
 
     #region ctor
-    public Ticket(Guid id, int ticketNumber, string title, string? description, Status status) : base(id, title, description)
+    public Ticket(Guid id, int ticketNumber, string title, string? description, Status status, Priority priority) : base(id, title, description)
     {
         TicketNumber = ticketNumber;
+        
         Status = status;
+        Priority = priority;
 
         Notes = new();
     }
