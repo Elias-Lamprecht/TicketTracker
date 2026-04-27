@@ -10,7 +10,7 @@ public abstract class NamedEntity : BaseEntity
         set 
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentNullException("Title can't be null or whitespace.");
+                throw new ArgumentException("Title can't be null or whitespace.");
 
             _title = value;
         }
@@ -22,7 +22,10 @@ public abstract class NamedEntity : BaseEntity
         get => _description; 
         set 
         {
-            _description = string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Description can't be null or whitespace.");
+
+            _description = value;
         }
     }
     private string? _description = string.Empty;
@@ -36,4 +39,3 @@ public abstract class NamedEntity : BaseEntity
     }
     #endregion ctor
 }
-

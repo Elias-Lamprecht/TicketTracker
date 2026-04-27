@@ -7,7 +7,7 @@ public class PriorityService
     #region properties
 
     private static PriorityService? _instance { get; set; }
-    private List<Priority> _priorities { get; set; }
+    public List<Priority> Priorities { get; init; }
 
     #endregion properties
 
@@ -29,7 +29,7 @@ public class PriorityService
 
     private PriorityService()
     {
-        _priorities = new();
+        Priorities = new();
     }
 
     #endregion ctor
@@ -39,13 +39,18 @@ public class PriorityService
     public Priority CreatePriority(Guid id, string title, string description)
     {
         Priority priority = new(id, title, description);
-        _priorities.Add(priority);
+        Priorities.Add(priority);
         return priority;
     }
 
     public void DeletePriority(Priority priority)
     {
-        _priorities.Remove(priority);
+        Priorities.Remove(priority);
+    }
+
+    public void DeleteAllPrioritys()
+    {
+        Priorities.Clear();
     }
 
     #endregion methods
