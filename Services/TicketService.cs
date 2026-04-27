@@ -1,55 +1,48 @@
-﻿using System.Collections.ObjectModel;
-using TicketTracker.Models;
+﻿using TicketTracker.Models;
 
-namespace TicketTracker.Services
+namespace TicketTracker.Services;
+
+public class TicketService
 {
-    // Remove 'static' so the class can be instantiated as a Singleton
-    public class TicketService
+    #region properties
+
+    public List<Ticket> Tickets { get; private set; }
+    private static TicketService? _instance;
+
+    #endregion properties
+
+    #region singleton
+
+    public static TicketService Instance()
     {
-        #region singleton logic
-        private static TicketService? _instance;
-
-        public static TicketService Instance
+        if (_instance == null)
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new TicketService();
-                }
-                return _instance;
-            }
-        }
-        #endregion
-
-        #region properties
-        // Since this is already an ObservableCollection, 
-        // any Add/Remove here will automatically update the DataGrid!
-        public ObservableCollection<Ticket> Tickets { get; private set; }
-        #endregion
-
-        // Private constructor prevents other classes from using 'new TicketService()'
-        private TicketService()
-        {
-            Tickets = new ObservableCollection<Ticket>();
-
-            // Seed data
-            CreateTicket(Guid.NewGuid(), 1, "Fix Login", "User cannot log in", new Status(Guid.NewGuid(), "Open", "Red"));
-            CreateTicket(Guid.NewGuid(), 2, "DB Update", "Migration needed", new Status(Guid.NewGuid(), "In Progress", "Blue"));
+            _instance = new TicketService();
         }
 
-        #region methods
-        public Ticket CreateTicket(Guid id, int ticketNumber, string title, string description, Status status)
-        {
-            Ticket ticket = new Ticket(id, ticketNumber, title, description, status);
-            Tickets.Add(ticket);
-            return ticket;
-        }
+        return _instance;
+     }
+    
+    #endregion singleton
 
-        public void DeleteTicket(Ticket ticket)
-        {
-            Tickets.Remove(ticket);
-        }
-        #endregion
+    #region ctor
+    private TicketService()
+    {
+        Tickets = new();
     }
+    #endregion ctor
+
+    #region methods
+    public Ticket CreateTicket(Guid id, int ticketNumber, string title, string description, Status status)
+    {
+        Ticket ticket = new(id, ticketNumber, title, description, status);
+        Tickets.Add(ticket);
+        return ticket;
+    }
+
+    public void DeleteTicket(Ticket ticket)
+    {
+        Tickets.Remove(ticket);
+    }
+    #endregion
 }
