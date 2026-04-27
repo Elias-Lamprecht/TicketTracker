@@ -18,7 +18,7 @@ public class StatusRepository
 
     #region methods
 
-    public async void GetAllAsync()
+    public async Task<List<Status>> GetAllAsync()
     {
         List<Status> statuses = new();
 
@@ -31,8 +31,11 @@ public class StatusRepository
 
         while (await reader.ReadAsync())
         {
-            Console.WriteLine($"{reader.GetGuid(0)} {reader.GetString(1)} {(reader.IsDBNull(2) ? (string?)null : reader.GetString(2))}");
+            Status status = new(reader.GetGuid(0), reader.GetString(1), reader.GetString(2));
+            statuses.Add(status);
         }
+
+        return statuses;
     }
 
     public async void CreateStatusAsync(Status status)
