@@ -13,7 +13,7 @@ public class StatusService
 
     #region ctor
 
-    public StatusService(Guid id, string title, string description)
+    public StatusService()
     {
         _statuses = new();
     }
