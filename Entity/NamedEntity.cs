@@ -3,43 +3,37 @@
 public abstract class NamedEntity : BaseEntity
 {
     #region properties
-    public string Title { get; private set; }
-    public string? Description { get; private set; } = null;
+
+    public string Title 
+    { 
+        get => _title; 
+        set 
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException("Title can't be null or whitespace.");
+
+            _title = value;
+        }
+    }
+    private string _title = string.Empty;
+
+    public string? Description 
+    { 
+        get => _description; 
+        set 
+        {
+            _description = string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+        }
+    }
+    private string? _description = string.Empty;
     #endregion properties
 
     #region ctor
     public NamedEntity(Guid id, string title, string? description) : base(id)
     {
-        SetTitle(title);
-
-        if (description != null)
-        {
-            SetDescription(description);
-        }
-    }
-    #endregion ctor
-
-    #region methods
-    public void SetTitle(string title)
-    {
-        if (string.IsNullOrWhiteSpace(title))
-            throw new ArgumentNullException(nameof(title), "Ticket Title can't be null, empty or whitespace.");
-
         Title = title;
-    }
-
-    public void SetDescription(string description)
-    {
-        if (!string.IsNullOrWhiteSpace(description))
-            RemoveDescription();
-
         Description = description;
     }
-
-    public void RemoveDescription()
-    {
-        Description = null;
-    }
-    #endregion methods
+    #endregion ctor
 }
 
