@@ -33,9 +33,9 @@ public class TicketService
     #endregion ctor
 
     #region methods
-    public Ticket CreateTicket(Guid id, int ticketNumber, string title, string description, Status status)
+    public Ticket CreateTicket(Guid id, int ticketNumber, string title, string description, Status status, Priority priority)
     {
-        Ticket ticket = new(id, ticketNumber, title, description, status);
+        Ticket ticket = new(id, ticketNumber, title, description, status, priority);
         Tickets.Add(ticket);
         return ticket;
     }
