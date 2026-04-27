@@ -13,7 +13,7 @@ public class Note : BaseEntity
         set
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentNullException(nameof(value));
+                throw new ArgumentException(nameof(value), "Text can't be null or whitespace.");
             
             _text = value;
         }
