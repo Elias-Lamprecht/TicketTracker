@@ -35,6 +35,22 @@ public class StatusRepository
         }
     }
 
+    public async void CreateStatusAsync(Status status)
+    {
+        using SqlConnection connection = await _dbFactory.CreateOpenConnectionAsync();
+
+        const string sql = "INSERT INTO Status VALUES(@StatusId, @Title, @Description)";
+
+        using (SqlCommand command = new(sql, connection))
+        {
+            command.Parameters.Add("StatusId", System.Data.SqlDbType.UniqueIdentifier).Value = status.Id;
+            command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = status.Title;
+            command.Parameters.Add("@Description", System.Data.SqlDbType.VarChar).Value = status.Description;
+
+            command.ExecuteNonQuery();
+        }
+    }
+
     public async void DeleteStatusAsync(Status status)
     {
         using SqlConnection connection = await _dbFactory.CreateOpenConnectionAsync();
