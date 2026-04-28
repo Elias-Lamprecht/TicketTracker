@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TicketTracker\TicketTracker.csproj" />
+    <ProjectReference Include="..\TicketTracker.Core\TicketTracker.CoreLibrary.csproj" />
   </ItemGroup>
 
 </Project>
