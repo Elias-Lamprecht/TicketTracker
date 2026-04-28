@@ -7,7 +7,7 @@ public class NoteService
     #region properties
 
     private static NoteService? _instance { get; set; }
-    private List<Note> _notes { get; set; }
+    public List<Note> Notes { get; init; }
 
     #endregion properties
 
@@ -29,7 +29,7 @@ public class NoteService
 
     public NoteService()
     {
-        _notes = new();
+        Notes = new();
     }
 
     #endregion ctor
@@ -39,13 +39,14 @@ public class NoteService
     public Note CreateNote(Guid id, string text)
     {
         Note note = new(id, text);
-        _notes.Add(note);
+        Notes.Add(note);
         return note;
     }
 
     public void DeleteNote(Note note) 
     { 
-        _notes.Remove(note);
+        Notes.Remove(note);
+    }
     }
 
     #endregion methods
