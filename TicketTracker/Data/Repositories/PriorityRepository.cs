@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using System.Windows.Documents;
 using TicketTracker.Models;
 
 namespace TicketTracker.Data.Repositories;
@@ -34,7 +33,7 @@ public class PriorityRepository
         using SqlCommand command = new(sql, connection);
         using var reader = await command.ExecuteReaderAsync();
 
-        while (await reader.ReadAsync()) 
+        while (await reader.ReadAsync())
         {
             Priority priority = new(reader.GetGuid(0), reader.GetString(1), reader.GetString(2));
             priorities.Add(priority);
