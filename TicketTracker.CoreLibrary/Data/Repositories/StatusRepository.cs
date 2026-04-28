@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
-using TicketTracker.Models;
+using TicketTracker.CoreLibrary.Models;
 
-namespace TicketTracker.Data.Repositories;
+namespace TicketTracker.CoreLibrary.Data.Repositories;
 
 public class StatusRepository
 {

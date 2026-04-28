@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
-using TicketTracker.Models;
-using TicketTracker.Services;
+using TicketTracker.CoreLibrary.Models;
+using TicketTracker.CoreLibrary.Services;
 
 namespace TicketTracker.Tests.Services;
 
@@ -26,7 +26,7 @@ public class NoteServiceTests
     public void CreateNote_ShouldNotCreate_ThrowException(string? text)
     {
         // Arrange
-        Guid id  = Guid.NewGuid();
+        Guid id = Guid.NewGuid();
 
         // Act & Assert
         Assert.Throws<ArgumentException>(() => _noteService.CreateNote(id, text!));

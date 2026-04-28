@@ -1,6 +1,6 @@
-﻿using TicketTracker.Models;
+﻿using TicketTracker.CoreLibrary.Models;
 
-namespace TicketTracker.Services;
+namespace TicketTracker.CoreLibrary.Services;
 
 public class TicketService
 {
@@ -21,8 +21,8 @@ public class TicketService
         }
 
         return _instance;
-     }
-    
+    }
+
     #endregion singleton
 
     #region ctor

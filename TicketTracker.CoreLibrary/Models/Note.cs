@@ -1,6 +1,6 @@
-﻿using TicketTracker.Entity;
+﻿using TicketTracker.CoreLibrary.Entity;
 
-namespace TicketTracker.Models;
+namespace TicketTracker.CoreLibrary.Models;
 
 public class Note : BaseEntity
 {
@@ -9,12 +9,12 @@ public class Note : BaseEntity
     private string _text = string.Empty;
     public string Text
     {
-        get => _text; 
+        get => _text;
         set
         {
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException(nameof(value), "Text can't be null or whitespace.");
-            
+
             _text = value;
         }
     }
