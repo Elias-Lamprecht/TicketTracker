@@ -47,6 +47,10 @@ public class NoteService
     { 
         Notes.Remove(note);
     }
+
+    public void DeleteAllNotes()
+    {
+        Notes.Clear();
     }
 
     #endregion methods
