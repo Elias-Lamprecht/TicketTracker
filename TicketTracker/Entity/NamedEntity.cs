@@ -17,7 +17,7 @@ public abstract class NamedEntity : BaseEntity
     }
     private string _title = string.Empty;
 
-    public string? Description 
+    public string Description 
     { 
         get => _description; 
         set 
@@ -28,7 +28,7 @@ public abstract class NamedEntity : BaseEntity
             _description = value;
         }
     }
-    private string? _description = string.Empty;
+    private string _description = string.Empty;
     #endregion properties
 
     #region ctor
