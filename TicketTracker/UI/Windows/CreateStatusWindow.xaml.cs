@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using TicketTracker.Services;
 
 namespace TicketTracker.UI.Forms
@@ -28,9 +20,9 @@ namespace TicketTracker.UI.Forms
                 MessageBox.Show("The Title can't be empty or just whitespace.", "ValidationError", MessageBoxButton.OK, MessageBoxImage.Warning);
                 TitleInput.Focus();
                 return;
-            } 
-            
-            if (TitleInput.Text.Length > 32) 
+            }
+
+            if (TitleInput.Text.Length > 32)
             {
                 MessageBox.Show($"The Title can't be longer than 32 Characters. (Currently {TitleInput.Text.Length} long)", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 TitleInput.Focus();
@@ -43,11 +35,11 @@ namespace TicketTracker.UI.Forms
                 DescriptionInput.Focus();
                 return;
             }
-            
+
             if (DescriptionInput.Text.Length > 128)
             {
                 MessageBox.Show($"The Description can't be longer than 128 Characters. (Currently {DescriptionInput.Text.Length} long)", "ValidationError", MessageBoxButton.OK, MessageBoxImage.Warning);
-                DescriptionInput.Focus(); 
+                DescriptionInput.Focus();
                 return;
             }
 
