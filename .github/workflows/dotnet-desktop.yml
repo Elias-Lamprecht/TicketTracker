@@ -18,6 +18,15 @@ jobs:
     - name: Create Constants file
       shell: pwsh
       run: |
+        # Fix: Ensure the directory exists before writing the file
+        $root = "${{ github.workspace }}"
+        $targetDir = Join-Path $root "TicketTracker.CoreLibrary"
+        
+        if (!(Test-Path $targetDir)) { 
+            Write-Host "Directory $targetDir not found. Creating it..."
+            New-Item -ItemType Directory -Path $targetDir -Force 
+        }
+
         $content = @"
         namespace TicketTracker;
         public static class Constants
@@ -25,7 +34,9 @@ jobs:
             public const string ConnectionString = "${{ secrets.DB_CONNECTION_STRING }}";
         }
         "@
-        Set-Content -Path "TicketTracker/Constants.cs" -Value $content
+        
+        $targetFile = Join-Path $targetDir "Constants.cs"
+        Set-Content -Path $targetFile -Value $content
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -33,21 +44,21 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Add SqlClient
-      working-directory: ./TicketTracker
+      working-directory: ./TicketTracker.CoreLibrary
       run: dotnet add package Microsoft.Data.SqlClient
 
     - name: Restore dependencies
-      working-directory: ./TicketTracker
+      working-directory: ./TicketTracker.CoreLibrary
       run: dotnet restore
 
     - name: Build
-      working-directory: ./TicketTracker
+      working-directory: ./TicketTracker.CoreLibrary
       run: dotnet build --no-restore --configuration Release
 
   # --- JOB 2: TEST ---
   test:
     name: "Run Unit Tests"
-    needs: build  # <--- THIS IS THE REQUIREMENT
+    needs: build
     runs-on: windows-latest
     steps:
     - name: Checkout repository
@@ -58,18 +69,21 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    # Re-create constants for the test environment
-    - name: Create Constants file
+    - name: Create Constants file (for Tests)
       shell: pwsh
       run: |
+        $root = "${{ github.workspace }}"
+        $targetDir = Join-Path $root "TicketTracker.CoreLibrary"
+        if (!(Test-Path $targetDir)) { New-Item -ItemType Directory -Path $targetDir -Force }
+
         $content = @"
         namespace TicketTracker;
         public static class Constants { public const string ConnectionString = "${{ secrets.DB_CONNECTION_STRING }}"; }
         "@
-        Set-Content -Path "TicketTracker/Constants.cs" -Value $content
+        Set-Content -Path (Join-Path $targetDir "Constants.cs") -Value $content
 
     - name: Add SqlClient
-      working-directory: ./TicketTracker
+      working-directory: ./TicketTracker.CoreLibrary
       run: dotnet add package Microsoft.Data.SqlClient
 
     - name: Test
