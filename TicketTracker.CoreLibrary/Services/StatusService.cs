@@ -1,54 +1,54 @@
-﻿using TicketTracker.Models;
+﻿using TicketTracker.CoreLibrary.Models;
 
-namespace TicketTracker.Services;
+namespace TicketTracker.CoreLibrary.Services;
 
 public class StatusService
 {
-	#region ctor
+    #region ctor
 
-	public StatusService()
-	{
-		Statuses = new List<Status>();
-	}
+    public StatusService()
+    {
+        Statuses = new List<Status>();
+    }
 
-	#endregion ctor
+    #endregion ctor
 
-	#region singleton
+    #region singleton
 
-	public static StatusService Instance()
-	{
-		if (_instance == null) _instance = new StatusService();
+    public static StatusService Instance()
+    {
+        if (_instance == null) _instance = new StatusService();
 
-		return _instance;
-	}
+        return _instance;
+    }
 
-	#endregion singleton
+    #endregion singleton
 
-	#region properties
+    #region properties
 
-	private static StatusService? _instance { get; set; }
-	public List<Status> Statuses { get; init; }
+    private static StatusService? _instance { get; set; }
+    public List<Status> Statuses { get; init; }
 
-	#endregion properties
+    #endregion properties
 
-	#region methods
+    #region methods
 
-	public Status CreateStatus(Guid id, string title, string description)
-	{
-		Status status = new(id, title, description);
-		Statuses.Add(status);
-		return status;
-	}
+    public Status CreateStatus(Guid id, string title, string description)
+    {
+        Status status = new(id, title, description);
+        Statuses.Add(status);
+        return status;
+    }
 
-	public void DeleteStatus(Status status)
-	{
-		Statuses.Remove(status);
-	}
+    public void DeleteStatus(Status status)
+    {
+        Statuses.Remove(status);
+    }
 
-	public void DeleteAllStatuses()
-	{
-		Statuses.Clear();
-	}
+    public void DeleteAllStatuses()
+    {
+        Statuses.Clear();
+    }
 
-	#endregion methods
+    #endregion methods
 }

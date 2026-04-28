@@ -1,6 +1,6 @@
-﻿using TicketTracker.Models;
+﻿using TicketTracker.CoreLibrary.Models;
 
-namespace TicketTracker.Services;
+namespace TicketTracker.CoreLibrary.Services;
 
 public class NoteService
 {
@@ -43,8 +43,8 @@ public class NoteService
         return note;
     }
 
-    public void DeleteNote(Note note) 
-    { 
+    public void DeleteNote(Note note)
+    {
         Notes.Remove(note);
     }
 

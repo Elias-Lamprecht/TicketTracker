@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
-using System.Linq;
-using TicketTracker.Models;
-using TicketTracker.Services;
+using TicketTracker.CoreLibrary.Models;
+using TicketTracker.CoreLibrary.Services;
 
 [TestFixture]
 public class PriorityServiceTests

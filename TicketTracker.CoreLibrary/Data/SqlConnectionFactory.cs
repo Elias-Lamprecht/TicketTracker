@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace TicketTracker.Data;
+namespace TicketTracker.CoreLibrary.Data;
 
 #region interface
 
@@ -14,15 +14,15 @@ public interface IDbConnectionFactory
 public class SqlConnectionFactory : IDbConnectionFactory
 {
     #region properties
-    
+
     private readonly string _connectionString;
-    
+
     #endregion properties
 
     #region ctor
 
     public SqlConnectionFactory(string connectionString = Constants.ConnectionString) => _connectionString = connectionString;
-    
+
     #endregion ctor
 
     #region methods

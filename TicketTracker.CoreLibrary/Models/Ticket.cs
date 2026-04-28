@@ -1,6 +1,6 @@
-﻿using TicketTracker.Entity;
+﻿using TicketTracker.CoreLibrary.Entity;
 
-namespace TicketTracker.Models;
+namespace TicketTracker.CoreLibrary.Models;
 
 public class Ticket : NamedEntity
 {
@@ -22,7 +22,7 @@ public class Ticket : NamedEntity
     public Ticket(Guid id, int ticketNumber, string title, string? description, Status status, Priority priority) : base(id, title, description)
     {
         TicketNumber = ticketNumber;
-        
+
         Status = status;
         Priority = priority;
 

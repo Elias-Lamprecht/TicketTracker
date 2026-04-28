@@ -1,6 +1,6 @@
-﻿using TicketTracker.Entity;
+﻿using TicketTracker.CoreLibrary.Entity;
 
-namespace TicketTracker.Models;
+namespace TicketTracker.CoreLibrary.Models;
 
 public class Status : NamedEntity
 {
