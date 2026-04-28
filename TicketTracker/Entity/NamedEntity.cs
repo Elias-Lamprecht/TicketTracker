@@ -4,10 +4,10 @@ public abstract class NamedEntity : BaseEntity
 {
     #region properties
 
-    public string Title 
-    { 
-        get => _title; 
-        set 
+    public string Title
+    {
+        get => _title;
+        set
         {
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException("Title can't be null or whitespace.");
@@ -17,10 +17,10 @@ public abstract class NamedEntity : BaseEntity
     }
     private string _title = string.Empty;
 
-    public string Description 
-    { 
-        get => _description; 
-        set 
+    public string Description
+    {
+        get => _description;
+        set
         {
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException("Description can't be null or whitespace.");
@@ -32,7 +32,7 @@ public abstract class NamedEntity : BaseEntity
     #endregion properties
 
     #region ctor
-    public NamedEntity(Guid id, string title, string? description) : base(id)
+    public NamedEntity(Guid id, string title, string description) : base(id)
     {
         Title = title;
         Description = description;
